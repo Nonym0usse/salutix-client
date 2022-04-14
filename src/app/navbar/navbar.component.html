@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isLogin">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/logo-violet.png" width="80" height="30" class="d-inline-block align-top" alt="">
+      Bootstrap
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"> <i class="fa fa-tachometer fa-1x" style="color:#FFF;" aria-hidden="true"></i> Dashboard</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOrders" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-users fa-1x" style="color:#FFF;" aria-hidden="true"></i>  Orders
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownOrders">
+            <li><a class="dropdown-item" href="#">List orders</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Synchronizing catalog</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-cutlery fa-1x" style="color:#FFF;" aria-hidden="true"></i> Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">List products</a></li>
+            <li><a class="dropdown-item" href="#">Add a product</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Synchronizing catalog</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search a product..." aria-label="Search">
+        <button class="btn btn-outline-info" type="submit">Search</button>
+      </form>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-light" (click)="loginService.SignOut()"> <i class="fa fa-user-circle-o fa-1x" style="color:#FFF;" aria-hidden="true"></i> Logout</button>
+      </li>
+    </div>
+  </div>
+</nav>

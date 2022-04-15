@@ -1,0 +1,81 @@
+<div class="container head">
+  <div class="row">
+    <h1 class="title">Add product</h1>
+
+    <mat-stepper [linear]="true" #stepper>
+      <mat-step [completed]="completed" [stepControl]="firstFormGroup">
+        <ng-http-loader spinner="sk-wave" [filteredMethods]="['POST']"></ng-http-loader>
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Fill out Amazon ASIN</ng-template>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>ASIN Amazon Product</mat-label>
+            <input matInput  placeholder="ASIN..." formControlName="asin" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>VAT</mat-label>
+            <input matInput  placeholder="VAT..." formControlName="vat" required>
+          </mat-form-field>
+          <div>
+            <button class="btn btn-dark" (click)="scrapping(stepper)">Validate</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Verify got data">
+        <div class="alert alert-success" *ngIf="success">
+          {{success}}
+        </div>
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field class="example-full-width"  appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title"  placeholder="Title...">
+          </mat-form-field>
+          <br>
+          <ckeditor formControlName="description" [editor]="Editor"></ckeditor>
+          <br>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Purchase Amazon price</mat-label>
+            <input type="number" matInput formControlName="price" placeholder="Price...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Naver Price</mat-label>
+            <input type="number" matInput formControlName="naverPrice" placeholder="Naver price...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Other Price</mat-label>
+            <input type="number" matInput formControlName="otherPrice" placeholder="Other price...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Inventory</mat-label>
+            <input matInput formControlName="inventory" placeholder="Inventory...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Weight</mat-label>
+            <input type="number" matInput formControlName="weight" placeholder="Weight...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Dimensions</mat-label>
+            <input matInput formControlName="dimensions" placeholder="Dimensions...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Delivery</mat-label>
+            <input type="number" matInput formControlName="delivery" placeholder="Delivery price...">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Keywords</mat-label>
+            <input matInput formControlName="keywords" placeholder="Keywords for optimized search">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Brand</mat-label>
+            <input matInput formControlName="brand" placeholder="Brand">
+          </mat-form-field>
+          <div>
+            <button class="btn btn-info" matStepperPrevious style="margin-right: 10px">Back</button>
+            <button class="btn btn-danger" (click)="saveData()">Save in database</button>
+          </div>
+        </form>
+
+      </mat-step>
+    </mat-stepper>
+
+  </div>
+</div>

@@ -7,23 +7,37 @@ import {Product} from "../interfaces/product";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = `https://salutix.herokuapp.com/products`
+  private baseURL = 'https://salutix.herokuapp.com/products';
   user: any;
   headers: any;
 
   constructor(private http: HttpClient) {
-
-  }
-
-  getProducts(): Observable<any> {
-   const user = JSON.parse(localStorage.getItem('user')!);
-
-   console.log(user)
-    const headers = new HttpHeaders(
+    const user = JSON.parse(localStorage.getItem('user')!);
+    this.headers = new HttpHeaders(
       {
         'Authorization': 'Bearer ' + user.stsTokenManager.accessToken,
       });
-    return this.http.get<Product>(`${this.baseURL}/list`, { headers: headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  getProducts(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/list`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  getProductsScrapping(asin: string, vat: string): Observable<any> {
+    return this.http.get<Product>(this.baseURL + '/scrapping/' + asin + '/' + vat, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete<Product>(this.baseURL + '/delete/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  getSingleProduct(id: string | null | undefined): Observable<any> {
+    return this.http.get<Product>(this.baseURL + '/list/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  saveProduct(data: Product): Observable<any> {
+    console.log(data);
+    return this.http.post<Product>(this.baseURL + '/add-product', data,{ headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   errorHandler(error: HttpErrorResponse) {

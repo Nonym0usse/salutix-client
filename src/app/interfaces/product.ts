@@ -2,13 +2,13 @@ export interface Product {
   title: string
   description: string;
   price: number;
-  naverPrice: number;
-  otherPrice: number;
+  naverprice: number;
+  othermarketplace: number;
   inventory: string;
   weight: number;
   dimensions: string;
   vat: number;
-  asin: string;
+  ASIN: string;
   url: string;
   delivery: number;
   keywords: string;
@@ -16,4 +16,5 @@ export interface Product {
   rank: number;
   brand: string;
   date: string;
+  lastPurchasePrice: string;
 }

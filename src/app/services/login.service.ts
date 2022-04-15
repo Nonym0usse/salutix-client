@@ -32,17 +32,16 @@ export class LoginService {
 
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['products/list']);
-        });
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+   return  new Promise((resolve, reject) => {
+     this.afAuth
+       .signInWithEmailAndPassword(email, password)
+       .then((result) => {
+         resolve(result);
+       })
+       .catch((error) => {
+         reject(error);
+       });
+    });
   }
 
 
@@ -51,23 +50,14 @@ export class LoginService {
     return user !== null;
   }
 
-
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
-  }
   // Sign out
   SignOut() {
-    return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['login']);
+    return  new Promise((resolve, reject) => {
+      return this.afAuth.signOut().then(() => {
+        resolve('success');
+      }).catch((error) => {
+        reject(error);
+      })
     });
   }
 

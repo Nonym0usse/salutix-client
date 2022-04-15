@@ -25,6 +25,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import { CoupangComponent } from './sync/coupang/coupang.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
     NavbarComponent,
     DashboardComponent,
     ModifyComponent,
-    CreateComponent
+    CreateComponent,
+    CoupangComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

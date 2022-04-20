@@ -40,6 +40,10 @@ export class ProductsService {
     return this.http.post<Product>(this.baseURL + '/add-product', data,{ headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
+  saveProductCoupang(): Observable<any> {
+    return this.http.post<Product>(this.baseURL + '/coupang/add-product', { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || "server error.");
   }

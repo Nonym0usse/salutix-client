@@ -91,4 +91,7 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  addInCoupang(){
+    this.productService.saveProductCoupang().subscribe((test) => console.log(test));
+  }
 }

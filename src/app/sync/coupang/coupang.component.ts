@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProductsService} from "../../services/products.service";
 
 @Component({
   selector: 'app-coupang',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoupangComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ProductService: ProductsService) { }
 
   ngOnInit(): void {
   }

@@ -5,6 +5,7 @@ import {ListComponent} from "./products/list/list.component";
 import {AuthGuard} from "./shared/guard/auth.guard";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CreateComponent} from "./products/create/create.component";
+import {CoupangComponent} from "./sync/coupang/coupang.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'products/list', component: ListComponent, canActivate: [AuthGuard]  },
   { path: 'products/create', component: CreateComponent, canActivate: [AuthGuard]  },
   { path: 'products/modify/:id', component: ListComponent, canActivate: [AuthGuard]  },
+  { path: 'coupang/add-product', component: CoupangComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

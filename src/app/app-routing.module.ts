@@ -10,12 +10,12 @@ import {SecureInnerPagesGuard} from "./shared/secure-inner-pages.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
+  { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'products/list', component: ListComponent, canActivate: [AuthGuard]  },
   { path: 'products/create', component: CreateComponent, canActivate: [AuthGuard]  },
   { path: 'products/modify/:id', component: ListComponent, canActivate: [AuthGuard]  },
-  { path: 'coupang/add-product', component: CoupangComponent, canActivate: [AuthGuard]  },
+  { path: 'products/coupang/sync', component: CoupangComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

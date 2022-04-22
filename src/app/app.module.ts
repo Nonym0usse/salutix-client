@@ -28,6 +28,7 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import { CoupangComponent } from './sync/coupang/coupang.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { ChartModule } from 'angular2-chartjs';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -40,28 +41,29 @@ import { ChartModule } from 'angular2-chartjs';
     CreateComponent,
     CoupangComponent,
   ],
-    imports: [
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        AngularFireDatabaseModule,
-        MatStepperModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        NgbModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        CKEditorModule,
-        NgHttpLoaderModule.forRoot(),
-        FormsModule,
-        MatAutocompleteModule,
-      ChartModule
-    ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    CKEditorModule,
+    NgHttpLoaderModule.forRoot(),
+    FormsModule,
+    MatAutocompleteModule,
+    ChartModule,
+    MatButtonToggleModule
+  ],
   providers: [LoginService],
   bootstrap: [AppComponent]
 })

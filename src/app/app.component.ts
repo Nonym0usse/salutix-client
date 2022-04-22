@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "./services/login.service";
+import {Router} from "@angular/router";
+import {SearchService} from "./services/search.service";
 
 @Component({
   selector: 'app-root',
@@ -16,4 +18,5 @@ export class AppComponent implements OnInit {
 
   constructor(private loginService: LoginService) {
   }
+  
 }

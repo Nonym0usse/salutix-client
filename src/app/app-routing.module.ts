@@ -6,10 +6,11 @@ import {AuthGuard} from "./shared/guard/auth.guard";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CreateComponent} from "./products/create/create.component";
 import {CoupangComponent} from "./sync/coupang/coupang.component";
+import {SecureInnerPagesGuard} from "./shared/secure-inner-pages.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'products/list', component: ListComponent, canActivate: [AuthGuard]  },
   { path: 'products/create', component: CreateComponent, canActivate: [AuthGuard]  },

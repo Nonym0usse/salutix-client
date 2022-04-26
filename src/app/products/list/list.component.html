@@ -1,6 +1,11 @@
 <div class="container-fluid head">
-
   <h1 class="title">List catalog products</h1>
+  <div class="container-buttons">
+    <mat-button-toggle-group name="fontStyle" class="button-custom" aria-label="Font Style">
+      <mat-button-toggle class="sync" (click)="syncCoupangAllProducts()">Publish all catalog.</mat-button-toggle>
+      <mat-button-toggle>Sync. catalog </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
   <h4>{{products?.length}} articles found</h4>
   <table class="table">
     <ng-http-loader></ng-http-loader>

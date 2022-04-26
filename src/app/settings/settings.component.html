@@ -1,0 +1,27 @@
+<div class="container head">
+  <div class="row">
+    <h1 class="title">Settings</h1>
+    <form [formGroup]="secondFormGroup">
+      <ng-http-loader></ng-http-loader>
+      <mat-form-field class="example-full-width"  appearance="fill">
+        <mat-label>Currency</mat-label>
+        <input matInput formControlName="currency" type="number"  placeholder="Currency wons to euro...">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Margin</mat-label>
+        <input type="number" matInput formControlName="margin" placeholder="Margin on products...">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Coupang Fee</mat-label>
+        <input type="number" matInput formControlName="coupangfee" placeholder="Coupang Fee...">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Naver Fee</mat-label>
+        <input type="number" matInput formControlName="naverfee" placeholder="Naver Fee...">
+      </mat-form-field>
+      <div>
+        <button class="btn btn-danger" (click)="saveData()">Save in database</button>
+      </div>
+    </form>
+  </div>
+</div>

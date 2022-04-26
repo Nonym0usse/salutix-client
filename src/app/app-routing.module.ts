@@ -7,6 +7,8 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CreateComponent} from "./products/create/create.component";
 import {CoupangComponent} from "./sync/coupang/coupang.component";
 import {SecureInnerPagesGuard} from "./shared/secure-inner-pages.guard";
+import {ModifyComponent} from "./products/modify/modify.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'products/list', component: ListComponent, canActivate: [AuthGuard]  },
   { path: 'products/create', component: CreateComponent, canActivate: [AuthGuard]  },
-  { path: 'products/modify/:id', component: ListComponent, canActivate: [AuthGuard]  },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]  },
+  { path: 'products/modify/:id', component: ModifyComponent, canActivate: [AuthGuard]  },
   { path: 'products/coupang/sync', component: CoupangComponent, canActivate: [AuthGuard]  },
 ];
 

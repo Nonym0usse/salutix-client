@@ -29,6 +29,7 @@ import { CoupangComponent } from './sync/coupang/coupang.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { ChartModule } from 'angular2-chartjs';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     ModifyComponent,
     CreateComponent,
     CoupangComponent,
+    SettingsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

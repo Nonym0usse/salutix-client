@@ -1,25 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductsService} from "../../services/products.service";
 import {Product} from "../../interfaces/product";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+// @ts-ignore
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-modify',
   templateUrl: './modify.component.html',
-  styleUrls: ['./modify.component.css']
+  styleUrls: ['./modify.component.css'],
+
 })
 export class ModifyComponent implements OnInit {
-  products: Product[] | undefined;
+  products: Product | undefined;
   id: string | null | undefined;
-  constructor(private router: ActivatedRoute, private productsService: ProductsService) { }
+  // @ts-ignore
+  secondFormGroup: FormGroup;
+  completed = false;
+  public Editor = ClassicEditor;
+  constructor(private router: ActivatedRoute,private _formBuilder: FormBuilder, private routerNav: Router, private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.paramMap.get('id');
+    if(!this.id){
+      this.routerNav.navigate(['/dashboard'])
+    }
+    this.secondFormGroup = this._formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      naverPrice: ['', Validators.required],
+      otherPrice: ['', Validators.required],
+      inventory: ['', Validators.required],
+      weight: ['', Validators.required],
+      dimensions: ['', Validators.required],
+      keywords: ['', Validators.required],
+      brand: ['', Validators.required],
+    });
+    this.productsService.getSingleProduct(this.id).subscribe((data: Product) =>{
+      this.products = data;
+      this.secondFormGroup.setValue({
+        title: this.products!.title ?? null,
+        description: this.products!.description ?? null,
+        price: this.products!.price ?? null,
+        naverPrice: this.products!.naverprice ?? null,
+        otherPrice: this.products!.othermarketplace ?? null,
+        inventory: this.products!.inventory ?? null,
+        weight: this.products!.weight ?? null,
+        dimensions: this.products!.dimensions ?? null,
+        keywords: this.products!.keywords ?? null,
+        brand: this.products!.brand ?? null
+      });
+    });
+    // @ts-ignore
   }
 
-  getSingleProduct(){
-    this.productsService.getSingleProduct(this.id).subscribe((data: Product[]) =>{
-      this.products = data;
+  saveData(){
+    const dataForm = this.secondFormGroup.value;
+    dataForm.ASIN = this.products?.ASIN;
+    dataForm.date = this.products?.date;
+    dataForm.lastPurchasePrice = 0;
+    dataForm.rank = 0;
+    dataForm.image = this.products?.image;
+    dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
+    this.productsService.updateProduct(dataForm).subscribe(() => {
+      this.routerNav.navigate(['products/list'])
     });
   }
+
 }

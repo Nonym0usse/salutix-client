@@ -80,7 +80,7 @@ export class CreateComponent implements OnInit {
 
   saveData(){
     const dataForm = this.secondFormGroup.value;
-    dataForm.asin = this.products?.ASIN;
+    dataForm.ASIN = this.products?.ASIN;
     dataForm.date = this.products?.date;
     dataForm.lastPurchasePrice = 0;
     dataForm.rank = 0;

@@ -12,6 +12,7 @@ export interface Product {
   url: string;
   delivery: number;
   keywords: string;
+  category: string;
   image: any;
   rank: number;
   brand: string;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductsService} from "../../services/products.service";
 import {Product} from "../../interfaces/product";
 import {Router} from "@angular/router";
+import {CoupangService} from "../../services/coupang.service";
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class ListComponent implements OnInit {
   products: Product[] | undefined;
   error: string | undefined;
-  constructor(private productService: ProductsService, private router: Router) { }
+  constructor(private productService: ProductsService, private router: Router, private coupangService: CoupangService) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -24,10 +25,14 @@ export class ListComponent implements OnInit {
   }
 
   modifyProduct(product: string){
-    this.router.navigate(['/products/modify/', {id: product}]);
+    this.router.navigate(['/products/modify', product]);
   }
 
   deleteProduct(product: string){
+    this.productService.deleteProduct(product).subscribe((data) => console.log(data))
+  }
 
+  syncCoupangAllProducts(){
+    this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
   }
 }

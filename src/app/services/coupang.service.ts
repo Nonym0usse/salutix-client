@@ -24,6 +24,10 @@ export class CoupangService {
     return this.http.get<Product>(`${this.baseURL}/publish-all`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
+  syncAllProducts(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/sync-all`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
   getAllProducts(): Observable<any> {
     return this.http.get<Product>(`${this.baseURL}/products-in-shop`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }

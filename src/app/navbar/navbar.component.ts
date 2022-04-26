@@ -43,4 +43,7 @@ export class NavbarComponent implements OnInit {
     }).catch((err) => console.log(err))
   }
 
+  settings(){
+    this.router.navigate(['settings'], { skipLocationChange: true })
+  }
 }

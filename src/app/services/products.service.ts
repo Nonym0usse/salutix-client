@@ -32,6 +32,7 @@ export class ProductsService {
   }
 
   getSingleProduct(id: string | null | undefined): Observable<any> {
+    console.log(id);
     return this.http.get<Product>(this.baseURL + '/list/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
@@ -42,6 +43,10 @@ export class ProductsService {
 
   saveProductCoupang(): Observable<any> {
     return this.http.post<Product>(this.baseURL + '/coupang/add-product', { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  updateProduct(data: Product): Observable<any> {
+    return this.http.patch<Product>(this.baseURL + '/modify' , data, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   errorHandler(error: HttpErrorResponse) {

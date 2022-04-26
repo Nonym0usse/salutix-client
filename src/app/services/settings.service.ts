@@ -27,6 +27,10 @@ export class SettingsService {
     return this.http.patch<Settings>(this.baseURL + '/add', data, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
+  getDelivery(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/delivery`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || "server error.");
   }

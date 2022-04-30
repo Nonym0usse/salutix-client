@@ -2,8 +2,9 @@
   <h1 class="title">List catalog products</h1>
   <div class="container-buttons">
     <mat-button-toggle-group name="fontStyle" class="button-custom" aria-label="Font Style">
-      <mat-button-toggle class="sync">Publish all catalog.</mat-button-toggle>
-      <mat-button-toggle (click)="syncCoupangAllProducts()">Sync. catalog </mat-button-toggle>
+      <mat-button-toggle class="sync" (click)="publishProducts()">Publish all catalog.</mat-button-toggle>
+      <mat-button-toggle class="sync2" (click)="syncCoupangAllPrice()">Sync. All Price Products</mat-button-toggle>
+      <mat-button-toggle class="sync3" (click)="syncCoupangAllProducts()">Sync. catalog </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <h4>{{products?.length}} articles found</h4>
@@ -15,11 +16,13 @@
       <th scope="col">Name</th>
       <th scope="col">Purchase Price</th>
       <th scope="col">Naver</th>
-      <th scope="col">Other</th>
+      <th scope="col">Coupang</th>
+      <th scope="col">Last Sync.</th>
+      <th scope="col">Amazon URL.</th>
       <th scope="col">Delivery</th>
+      <th scope="col">Inventory</th>
       <th scope="col">Weight</th>
-      <th scope="col">Dimensions</th>
-      <th scope="col">VAT</th>
+      <th scope="col">Coupang Prod. ID</th>
       <th scope="col">Details</th>
       <th scope="col">Delete</th>
     </tr>
@@ -30,11 +33,13 @@
       <td>{{product.title}}</td>
       <td>{{product.price}}€</td>
       <td>{{product.naverprice}}₩</td>
-      <td>{{product.othermarketplace}}₩</td>
+      <td>{{product.coupangPrice}}₩</td>
+      <td>{{product.lastPurchasePrice}}</td>
+      <td><a target="_blank" class="btn btn-dark" href="{{product.url}}">Go</a></td>
       <td>{{product.delivery}}₩</td>
+      <td>{{product.inventory}}</td>
       <td>{{product.weight}}</td>
-      <td>{{product.dimensions}}</td>
-      <td>{{product.vat}}</td>
+      <td>{{product.coupangProductId}}</td>
       <td><button class="btn btn-primary" (click)="modifyProduct(product.ASIN)"><i class="fa fa-edit fa-1x" style="color:#FFF;" aria-hidden="true"></i></button> </td>
       <td><button class="btn btn-danger" (click)="deleteProduct(product.ASIN)"><i class="fa fa-trash fa-1x" style="color:#FFF;" aria-hidden="true"></i></button> </td>
     </tr>

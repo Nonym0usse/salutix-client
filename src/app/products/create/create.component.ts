@@ -41,8 +41,8 @@ export class CreateComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      naverPrice: ['', Validators.required],
-      otherPrice: ['', Validators.required],
+      naverprice: ['', Validators.required],
+      coupangPrice: ['', Validators.required],
       inventory: ['', Validators.required],
       weight: ['', Validators.required],
       dimensions: ['', Validators.required],
@@ -64,8 +64,8 @@ export class CreateComponent implements OnInit {
         title: this.products.title ?? null,
         description: this.products.description ?? null,
         price: this.products.price ?? null,
-        naverPrice: this.products.naverprice ?? null,
-        otherPrice: this.products.othermarketplace ?? null,
+        naverprice: this.products.naverprice ?? null,
+        coupangPrice: this.products.coupangPrice ?? null,
         inventory: this.products.inventory ?? null,
         weight: this.products.weight ?? null,
         dimensions: this.products.dimensions ?? null,
@@ -80,6 +80,7 @@ export class CreateComponent implements OnInit {
 
   saveData(){
     const dataForm = this.secondFormGroup.value;
+    console.log(dataForm)
     dataForm.ASIN = this.products?.ASIN;
     dataForm.date = this.products?.date;
     dataForm.lastPurchasePrice = 0;

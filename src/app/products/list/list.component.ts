@@ -24,6 +24,12 @@ export class ListComponent implements OnInit {
     });
   }
 
+  updateDelivery(){
+    this.coupangService.syncDelivery().subscribe((data: Product[]) =>{
+      this.products = data;
+    });
+  }
+
   modifyProduct(product: string){
     this.router.navigate(['/products/modify', product]);
   }
@@ -34,5 +40,13 @@ export class ListComponent implements OnInit {
 
   syncCoupangAllProducts(){
     this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
+  }
+
+  syncCoupangAllPrice(){
+    this.coupangService.syncAllPrice().subscribe((data) => console.log(data))
+  }
+
+  publishProducts(){
+    this.coupangService.publishAllProducts().subscribe((data) => console.log(data))
   }
 }

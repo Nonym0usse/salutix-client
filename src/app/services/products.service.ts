@@ -7,7 +7,7 @@ import {Product} from "../interfaces/product";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = 'http://localhost:3000/products';
+  private baseURL = 'http://salutix.herokuapp.com/products';
   user: any;
   headers: any;
 
@@ -28,16 +28,15 @@ export class ProductsService {
   }
 
   deleteProduct(id: string): Observable<any> {
+    console.log(id);
     return this.http.delete<Product>(this.baseURL + '/delete/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   getSingleProduct(id: string | null | undefined): Observable<any> {
-    console.log(id);
     return this.http.get<Product>(this.baseURL + '/list/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   saveProduct(data: Product): Observable<any> {
-    console.log(data);
     return this.http.post<Product>(this.baseURL + '/add-product', data,{ headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 

@@ -8,7 +8,7 @@ import {Product} from "../interfaces/product";
 })
 export class CoupangService {
 
-  private baseURL = 'http://localhost:3000/coupang';
+  private baseURL = 'http://salutix.herokuapp.com/coupang';
   user: any;
   headers: any;
 
@@ -25,7 +25,16 @@ export class CoupangService {
   }
 
   syncAllProducts(): Observable<any> {
-    return this.http.get<Product>(`${this.baseURL}/sync-all`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+    return this.http.get<Product>(`${this.baseURL}/sync-catalog`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  syncDelivery(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/sync-delivery`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+
+  syncAllPrice(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/sync-price`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   getAllProducts(): Observable<any> {

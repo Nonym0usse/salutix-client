@@ -3,7 +3,7 @@ export interface Product {
   description: string;
   price: number;
   naverprice: number;
-  othermarketplace: number;
+  coupangPrice: number;
   inventory: string;
   weight: number;
   dimensions: string;
@@ -13,6 +13,8 @@ export interface Product {
   delivery: number;
   keywords: string;
   category: string;
+  coupangProductId: string;
+  coupangVendorItemId: string;
   image: any;
   rank: number;
   brand: string;

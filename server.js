@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+
 function requireHTTPS(req, res, next) {
   // The 'x-forwarded-proto' check is for Heroku
   if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
@@ -6,11 +9,10 @@ function requireHTTPS(req, res, next) {
   next();
 }
 
-const express = require('express');
-const app = express();
+
 
 app.use(requireHTTPS);
-app.use(express.static('./dist/angular-heroku'));
+app.use(express.static('./dist/salutix-client'));
 
 app.get('/*', (req, res) =>
   res.sendFile('index.html', {root: 'dist/salutix-client/'}),

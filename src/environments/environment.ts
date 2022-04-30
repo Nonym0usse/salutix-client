@@ -4,7 +4,7 @@
 
 
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     apiKey: "AIzaSyCLI_jqOiAbpL05lIWPAWJPlYk9eTAj6AU",
     authDomain: "saluti-a8723.firebaseapp.com",

@@ -7,7 +7,7 @@ import {Product} from "../interfaces/product";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = 'http://salutix.herokuapp.com/products';
+  private baseURL = 'https://salutix.herokuapp.com/products';
   user: any;
   headers: any;
 

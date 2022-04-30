@@ -8,7 +8,7 @@ import {Product} from "../interfaces/product";
 })
 export class CoupangService {
 
-  private baseURL = 'http://salutix.herokuapp.com/coupang';
+  private baseURL = 'https://salutix.herokuapp.com/coupang';
   user: any;
   headers: any;
 

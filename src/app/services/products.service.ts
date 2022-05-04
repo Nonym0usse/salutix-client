@@ -7,7 +7,7 @@ import {Product} from "../interfaces/product";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = 'https://salutix.herokuapp.com/products';
+  private baseURL = 'http://www.109.14.168.138:3000/products';
   user: any;
   headers: any;
 
@@ -23,13 +23,12 @@ export class ProductsService {
     return this.http.get<Product>(`${this.baseURL}/list`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
-  getProductsScrapping(asin: string, vat: string): Observable<any> {
-    return this.http.get<Product>(this.baseURL + '/scrapping/' + asin + '/' + vat, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  getProductsScrapping(asin: string): Observable<any> {
+    return this.http.get<Product>(this.baseURL + '/scrapping/' + asin, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
-  deleteProduct(id: string): Observable<any> {
-    console.log(id);
-    return this.http.delete<Product>(this.baseURL + '/delete/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  deleteProduct(id: string, coupangId: string): Observable<any> {
+    return this.http.delete<Product>(this.baseURL + '/delete/' + id + '/' + coupangId, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   getSingleProduct(id: string | null | undefined): Observable<any> {

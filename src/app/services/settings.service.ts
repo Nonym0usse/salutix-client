@@ -7,7 +7,7 @@ import {Settings} from "../interfaces/settings";
   providedIn: 'root'
 })
 export class SettingsService {
-  private baseURL = 'https://salutix.herokuapp.com/settings';
+  private baseURL = 'http://www.109.14.168.138:3000/settings';
   user: any;
   headers: any;
 

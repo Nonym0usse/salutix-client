@@ -34,8 +34,8 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/products/modify', product]);
   }
 
-  deleteProduct(product: string){
-    this.productService.deleteProduct(product).subscribe((data) => console.log(data))
+  deleteProduct(ASIN: string, coupangProductId: string ){
+    this.productService.deleteProduct(ASIN, coupangProductId).subscribe((data) => console.log(data))
   }
 
   syncCoupangAllProducts(){

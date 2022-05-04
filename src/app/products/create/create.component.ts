@@ -34,7 +34,6 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       asin: ['', Validators.required],
-      vat: ['', Validators.required],
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -56,8 +55,7 @@ export class CreateComponent implements OnInit {
     // @ts-ignore
     const asin = this.firstFormGroup.get('asin').value;
     // @ts-ignore
-    const vat = this.firstFormGroup.get('vat').value;
-    this.productService.getProductsScrapping(asin, vat).subscribe((data: Product) =>{
+    this.productService.getProductsScrapping(asin).subscribe((data: Product) =>{
       this.products = data;
       // @ts-ignore
       this.secondFormGroup.setValue({

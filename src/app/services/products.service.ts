@@ -7,7 +7,9 @@ import {Product} from "../interfaces/product";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = 'http://www.109.14.168.138:3000/products';
+  //private baseURL = 'http://109.14.168.138:3000/products';
+  private baseURL = 'http://localhost:3000/products';
+
   user: any;
   headers: any;
 

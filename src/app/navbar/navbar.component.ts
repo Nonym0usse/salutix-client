@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {SearchService} from "../services/search.service";
 import {debounceTime, map, Observable, of} from "rxjs";
 import {Product} from "../interfaces/product";
+import {CoupangService} from "../services/coupang.service";
 
 // @ts-ignore
 @Component({
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
   // @ts-ignore
   products = of([]);
   searchModel = '';
-  constructor(private loginService: LoginService, private router: Router, private searchService: SearchService) {
+  constructor(private loginService: LoginService, private router: Router, private searchService: SearchService, private coupangService: CoupangService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +30,14 @@ export class NavbarComponent implements OnInit {
       debounceTime(300),
       map((data) => this.performFilter(data))
     )
+  }
+
+  syncCatalog(){
+    this.coupangService.syncCatalog().subscribe((data) => console.log(data))
+  }
+
+  syncCoupang(){
+    this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
   }
 
   performFilter(products: any) {
@@ -45,5 +54,9 @@ export class NavbarComponent implements OnInit {
 
   settings(){
     this.router.navigate(['settings'], { skipLocationChange: true })
+  }
+
+  verifyCoupangProduct(){
+    this.coupangService.verifyProducts().subscribe((data) => console.log(data))
   }
 }

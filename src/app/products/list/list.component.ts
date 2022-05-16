@@ -42,9 +42,6 @@ export class ListComponent implements OnInit {
     this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
   }
 
-  syncCoupangAllPrice(){
-    this.coupangService.syncAllPrice().subscribe((data) => console.log(data))
-  }
 
   publishProducts(){
     this.coupangService.publishAllProducts().subscribe((data) => console.log(data))

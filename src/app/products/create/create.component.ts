@@ -45,7 +45,6 @@ export class CreateComponent implements OnInit {
       inventory: ['', Validators.required],
       weight: ['', Validators.required],
       dimensions: ['', Validators.required],
-      delivery: ['', Validators.required],
       keywords: ['', Validators.required],
       brand: ['', Validators.required],
     });
@@ -67,7 +66,6 @@ export class CreateComponent implements OnInit {
         inventory: this.products.inventory ?? null,
         weight: this.products.weight ?? null,
         dimensions: this.products.dimensions ?? null,
-        delivery: this.products.delivery ?? null,
         keywords: this.products.keywords ?? null,
         brand: this.products.brand ?? null
       });

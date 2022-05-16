@@ -8,7 +8,7 @@ import {Product} from "../interfaces/product";
 })
 export class CoupangService {
 
-  private baseURL = 'http://www.109.14.168.138:3000/coupang';
+  private baseURL = 'http://localhost:3000/coupang';
   user: any;
   headers: any;
 
@@ -25,6 +25,10 @@ export class CoupangService {
   }
 
   syncAllProducts(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/sync`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  syncCatalog(): Observable<any> {
     return this.http.get<Product>(`${this.baseURL}/sync-catalog`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
@@ -32,13 +36,12 @@ export class CoupangService {
     return this.http.get<Product>(`${this.baseURL}/sync-delivery`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
-
-  syncAllPrice(): Observable<any> {
-    return this.http.get<Product>(`${this.baseURL}/sync-price`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
   getAllProducts(): Observable<any> {
     return this.http.get<Product>(`${this.baseURL}/products-in-shop`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  verifyProducts(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/verify-products`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
   errorHandler(error: HttpErrorResponse) {

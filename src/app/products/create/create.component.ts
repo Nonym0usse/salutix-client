@@ -6,6 +6,8 @@ import {MatStepper} from "@angular/material/stepper";
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 // @ts-ignore
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Router} from "@angular/router";
+import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/compat/storage";
 // @ts-ignore
 
 @Component({
@@ -29,7 +31,7 @@ export class CreateComponent implements OnInit {
   public Editor = ClassicEditor;
   success: string | undefined;
 
-  constructor(private _formBuilder: FormBuilder, private productService: ProductsService) {}
+  constructor(private _formBuilder: FormBuilder, private productService: ProductsService, private router: Router, private afStorage: AngularFireStorage) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -74,17 +76,34 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  saveData(){
+  uploadFile(file: string, name: any) {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(file).then(res => {
+          return res.blob();
+        }).then(blob => {
+          // @ts-ignore
+          this.afStorage.ref().child(name).put(blob).then(function(snapshot) {
+            snapshot.ref.getDownloadURL().then((url) => resolve(url))
+          })
+        }).catch(error => {
+          reject(error);
+        });
+      }
+    );
+  }
+
+  async saveData() {
     const dataForm = this.secondFormGroup.value;
-    console.log(dataForm)
     dataForm.ASIN = this.products?.ASIN;
     dataForm.date = this.products?.date;
     dataForm.lastPurchasePrice = 0;
     dataForm.rank = 0;
-    dataForm.image = this.products?.image;
+    dataForm.image = await this.uploadFile(this.products?.image, this.products?.ASIN);
+
     dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
     this.productService.saveProduct(dataForm).subscribe(() => {
-      this.success = "Successfully added to database.";
+      this.router.navigate(['products/list'])
     });
   }
 

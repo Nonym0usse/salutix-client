@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError, Observable, Subscription, tap, throwError} from 'rxjs';
+import {catchError, map, Observable, Subscription, tap, throwError} from 'rxjs';
 import {Product} from "../interfaces/product";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  //private baseURL = 'http://109.14.168.138:3000/products';
   private baseURL = 'http://localhost:3000/products';
+  productsRef = this.afFirestore.collection('products');
 
   user: any;
   headers: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private afFirestore: AngularFirestore) {
     const user = JSON.parse(localStorage.getItem('user')!);
     this.headers = new HttpHeaders(
       {
@@ -22,34 +23,10 @@ export class ProductsService {
   }
 
   getProducts(): Observable<any> {
-    return this.http.get<Product>(`${this.baseURL}/list`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+    return this.http.get<Product>(`${this.baseURL}/list`, { headers: this.headers });
   }
 
-  getProductsScrapping(asin: string): Observable<any> {
-    return this.http.get<Product>(this.baseURL + '/scrapping/' + asin, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  deleteProduct(id: string, coupangId: string): Observable<any> {
-    return this.http.delete<Product>(this.baseURL + '/delete/' + id + '/' + coupangId, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  getSingleProduct(id: string | null | undefined): Observable<any> {
-    return this.http.get<Product>(this.baseURL + '/list/' + id, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  saveProduct(data: Product): Observable<any> {
-    return this.http.post<Product>(this.baseURL + '/add-product', data,{ headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  saveProductCoupang(): Observable<any> {
-    return this.http.post<Product>(this.baseURL + '/coupang/add-product', { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  updateProduct(data: Product): Observable<any> {
-    return this.http.patch<Product>(this.baseURL + '/modify' , data, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
-
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error.message || "server error.");
+  getAllProducts(){
+    return this.productsRef.snapshotChanges();
   }
 }

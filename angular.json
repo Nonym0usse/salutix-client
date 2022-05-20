@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/salutix-client",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,7 +35,11 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "./node_modules/crypto-js/crypto-js.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "crypto-js"
             ]
           },
           "configurations": {
@@ -57,7 +62,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "aot": true
             },
             "development": {
               "buildOptimizer": false,

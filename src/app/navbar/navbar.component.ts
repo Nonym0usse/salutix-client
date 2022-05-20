@@ -33,11 +33,11 @@ export class NavbarComponent implements OnInit {
   }
 
   syncCatalog(){
-    this.coupangService.syncCatalog().subscribe((data) => console.log(data))
+    //this.coupangService.syncCatalog().subscribe((data) => console.log(data))
   }
 
   syncCoupang(){
-    this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
+    //this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
   }
 
   performFilter(products: any) {
@@ -57,6 +57,6 @@ export class NavbarComponent implements OnInit {
   }
 
   verifyCoupangProduct(){
-    this.coupangService.verifyProducts().subscribe((data) => console.log(data))
+    //this.coupangService.verifyProducts().subscribe((data) => console.log(data))
   }
 }

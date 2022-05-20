@@ -3,11 +3,16 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../../services/products.service";
 import {Product} from "../../interfaces/product";
 import {MatStepper} from "@angular/material/stepper";
+// @ts-ignore
+import Resizer from "react-image-file-resizer";
+
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 // @ts-ignore
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {Router} from "@angular/router";
 import {AngularFireStorage, AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {SpinnerVisibilityService} from "ng-http-loader";
+import {CoupangService} from "../../services/coupang.service";
 // @ts-ignore
 
 @Component({
@@ -31,7 +36,7 @@ export class CreateComponent implements OnInit {
   public Editor = ClassicEditor;
   success: string | undefined;
 
-  constructor(private _formBuilder: FormBuilder, private productService: ProductsService, private router: Router, private afStorage: AngularFireStorage) {}
+  constructor(private _formBuilder: FormBuilder, private productService: ProductsService, private router: Router, private afStorage: AngularFireStorage, private spinner: SpinnerVisibilityService, private coupangService: CoupangService) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -82,32 +87,39 @@ export class CreateComponent implements OnInit {
         fetch(file).then(res => {
           return res.blob();
         }).then(blob => {
-          // @ts-ignore
-          this.afStorage.ref().child(name).put(blob).then(function(snapshot) {
-            snapshot.ref.getDownloadURL().then((url) => resolve(url))
-          })
-        }).catch(error => {
-          reject(error);
-        });
-      }
-    );
+            Resizer.imageFileResizer(
+              blob,
+              1000,
+              1000,
+              "JPEG",
+              100,
+              0,
+              (uri: any) => {
+                // @ts-ignore
+                this.afStorage.ref().child(name + '.jpg').put(uri).then(() => resolve("https://storage.googleapis.com/salutix/"+ name +".jpg"))
+                  .catch(function (err: any) {
+                    console.error(err);
+                  });
+              },
+              "blob",
+              500,
+              500,
+            );
+          }
+        );
+      });
   }
 
+
   async saveData() {
+    this.spinner.show();
     const dataForm = this.secondFormGroup.value;
     dataForm.ASIN = this.products?.ASIN;
     dataForm.date = this.products?.date;
     dataForm.lastPurchasePrice = 0;
     dataForm.rank = 0;
     dataForm.image = await this.uploadFile(this.products?.image, this.products?.ASIN);
-
     dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
-    this.productService.saveProduct(dataForm).subscribe(() => {
-      this.router.navigate(['products/list'])
-    });
-  }
-
-  addInCoupang(){
-    this.productService.saveProductCoupang().subscribe((test) => console.log(test));
+    await this.coupangService.createProduct(dataForm).then(() => this.router.navigate(['products/list']).catch((err) => console.log(err)))
   }
 }

@@ -25,7 +25,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
-import { CoupangComponent } from './sync/coupang/coupang.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { ChartModule } from 'angular2-chartjs';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
@@ -40,7 +39,6 @@ import { SettingsComponent } from './settings/settings.component';
     DashboardComponent,
     ModifyComponent,
     CreateComponent,
-    CoupangComponent,
     SettingsComponent,
   ],
   imports: [

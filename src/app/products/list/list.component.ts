@@ -19,15 +19,19 @@ export class ListComponent implements OnInit {
   }
 
   getProducts(){
-    this.productService.getProducts().subscribe((data: Product[]) =>{
-      this.products = data;
+    this.productService.getAllProducts().subscribe((data) =>{
+      this.products = data.map(e => {
+        // @ts-ignore
+        return {id: e.payload.doc.id, ...e.payload.doc.data()
+        } as Product;
+      })
     });
   }
 
   updateDelivery(){
-    this.coupangService.syncDelivery().subscribe((data: Product[]) =>{
+    /*this.coupangService.syncDelivery().subscribe((data: Product[]) =>{
       this.products = data;
-    });
+    });*/
   }
 
   modifyProduct(product: string){
@@ -35,15 +39,6 @@ export class ListComponent implements OnInit {
   }
 
   deleteProduct(ASIN: string, coupangProductId: string ){
-    this.productService.deleteProduct(ASIN, coupangProductId).subscribe((data) => console.log(data))
-  }
-
-  syncCoupangAllProducts(){
-    this.coupangService.syncAllProducts().subscribe((data) => console.log(data))
-  }
-
-
-  publishProducts(){
-    this.coupangService.publishAllProducts().subscribe((data) => console.log(data))
+   // this.productService.deleteProduct(ASIN, coupangProductId).subscribe((data) => console.log(data))
   }
 }

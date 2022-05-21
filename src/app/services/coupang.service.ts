@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {HttpClient} from "@angular/common/http";
 import {Coupang} from "../shared/Coupang";
-import * as https from "https";
 import axios from "axios";
 
 
@@ -92,7 +90,7 @@ export class CoupangService {
 
       let body: any = [];
       // @ts-ignore
-      axios.post(coupangCredentials.APIInfo('/v2/providers/seller_api/apis/api/v1/marketplace/seller-products', 'POST'), strjson)
+      axios.post(coupangCredentials.APIInfo('/v2/providers/seller_api/apis/api/v1/marketplace/seller-products', 'POST'))
         .then((data) => {
           body.push(data);
           body = Buffer.concat(body).toString();

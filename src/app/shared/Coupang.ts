@@ -2,7 +2,7 @@ import * as crypto from 'crypto-js';
 
 export class Coupang{
 
-  APIInfo(url: any, method: any, query?: any, headers){
+  APIInfo(url: any, method: any, query?: any){
 
     const datetime = new Date().toISOString().substr(2,17).replace(/:/gi, '').replace(/-/gi, '') + "Z";
     const message = datetime + method + url + query;

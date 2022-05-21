@@ -22,8 +22,8 @@ export class ProductsService {
       });
   }
 
-  getProducts(): Observable<any> {
-    return this.http.get<Product>(`${this.baseURL}/list`, { headers: this.headers });
+  getProductsScrapping(asin: string): Observable<any> {
+    return this.http.get<Product>(this.baseURL + '/scrapping/' + asin, { headers: this.headers });
   }
 
   getAllProducts(){

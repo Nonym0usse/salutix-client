@@ -26,7 +26,7 @@ export class ModifyComponent implements OnInit {
     if(!this.id){
       this.routerNav.navigate(['/dashboard'])
     }
-   /* this.secondFormGroup = this._formBuilder.group({
+    this.secondFormGroup = this._formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
@@ -38,6 +38,7 @@ export class ModifyComponent implements OnInit {
       keywords: ['', Validators.required],
       brand: ['', Validators.required],
     });
+    // @ts-ignore
     this.productsService.getSingleProduct(this.id).subscribe((data: Product) =>{
       this.products = data;
       this.secondFormGroup.setValue({
@@ -53,7 +54,6 @@ export class ModifyComponent implements OnInit {
         brand: this.products!.brand ?? null
       });
     });
-    // @ts-ignore*/
   }
 
   saveData(){
@@ -64,9 +64,8 @@ export class ModifyComponent implements OnInit {
     dataForm.rank = 0;
     dataForm.image = this.products?.image;
     dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
-    /*this.productsService.updateProduct(dataForm).subscribe(() => {
+    this.productsService.modifyProduct(dataForm).then(() => {
       this.routerNav.navigate(['products/list'])
-    });*/
+    });
   }
-
 }

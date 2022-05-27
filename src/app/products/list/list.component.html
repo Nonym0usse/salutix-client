@@ -38,7 +38,7 @@
       <td>{{product.keywords}}</td>
       <td>{{product.coupangProductId}}</td>
       <td><button class="btn btn-primary" (click)="modifyProduct(product.ASIN)"><i class="fa fa-edit fa-1x" style="color:#FFF;" aria-hidden="true"></i></button> </td>
-      <td><button class="btn btn-danger" (click)="deleteProduct(product.ASIN, product.coupangProductId)"><i class="fa fa-trash fa-1x" style="color:#FFF;" aria-hidden="true"></i></button> </td>
+      <td><button class="btn btn-danger" (click)="deleteProduct(product.ASIN, product.image, product.coupangProductId)"><i class="fa fa-trash fa-1x" style="color:#FFF;" aria-hidden="true"></i></button> </td>
     </tr>
     </tbody>
   </table>

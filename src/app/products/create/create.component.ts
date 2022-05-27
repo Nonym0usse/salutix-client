@@ -112,7 +112,6 @@ export class CreateComponent implements OnInit {
 
 
    async saveData() {
-    console.log('ok')
      const dataForm = this.secondFormGroup.value;
      dataForm.ASIN = this.products?.ASIN;
      dataForm.date = this.products?.date;
@@ -120,7 +119,6 @@ export class CreateComponent implements OnInit {
      dataForm.rank = 0;
      dataForm.image = await this.uploadFile(this.products?.image, this.products?.ASIN);
      dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
-     console.log(dataForm)
-     this.coupangService.createProduct(dataForm).then(() => this.router.navigate(['products/list']).catch((err) => console.log(err)))
+     this.coupangService.createProduct(dataForm).subscribe(() => this.router.navigate(['products/list']).catch((err) => console.log(err)))
    }
 }

@@ -29,6 +29,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { ChartModule } from 'angular2-chartjs';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { SettingsComponent } from './settings/settings.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SettingsComponent } from './settings/settings.component';
     ModifyComponent,
     CreateComponent,
     SettingsComponent,
+    OrdersComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

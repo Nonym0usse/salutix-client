@@ -9,7 +9,8 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 })
 export class CoupangService {
 
-  private baseURL = 'https://salutixapi.com/products';
+  private baseURL = 'http://localhost:3000/products';
+
   user: any;
   headers: any;
   productsRef = this.afFirestore.collection('products');
@@ -22,9 +23,6 @@ export class CoupangService {
       });
   }
 
-  createProduct(product: Product): Observable<any> {
-    return this.http.post<Product>(`${this.baseURL}/add-product`, product).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
 
   syncAllProducts(): Observable<any> {
     return this.http.get<Product>(`${this.baseURL}/sync`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
@@ -32,6 +30,10 @@ export class CoupangService {
 
   syncCatalog(): Observable<any> {
     return this.http.get<Product>(`${this.baseURL}/sync-catalog`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
+  getOrders(): Observable<any> {
+    return this.http.get(this.baseURL + '/orders');
   }
 
   errorHandler(error: HttpErrorResponse) {

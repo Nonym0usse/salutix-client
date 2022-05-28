@@ -51,7 +51,6 @@ export class CreateComponent implements OnInit {
       coupangPrice: ['', Validators.required],
       inventory: ['', Validators.required],
       weight: ['', Validators.required],
-      dimensions: ['', Validators.required],
       keywords: ['', Validators.required],
       brand: ['', Validators.required],
     });
@@ -72,7 +71,6 @@ export class CreateComponent implements OnInit {
         coupangPrice: this.products.coupangPrice ?? null,
         inventory: this.products.inventory ?? null,
         weight: this.products.weight ?? null,
-        dimensions: this.products.dimensions ?? null,
         keywords: this.products.keywords ?? null,
         brand: this.products.brand ?? null
       });
@@ -81,32 +79,39 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  uploadFile(file: string, name: any) {
+  uploadFile(file: any, name: any) {
+    const arr: string[] = [];
     return new Promise(
       (resolve, reject) => {
-        fetch(file).then(res => {
-          return res.blob();
-        }).then(blob => {
-            Resizer.imageFileResizer(
-              blob,
-              1000,
-              1000,
-              "JPEG",
-              100,
-              0,
-              (uri: any) => {
-                // @ts-ignore
-                this.afStorage.ref().child(name + '.jpg').put(uri).then(() => resolve("https://storage.googleapis.com/salutix/"+ name +".jpg"))
-                  .catch(function (err: any) {
-                    console.error(err);
-                  });
-              },
-              "blob",
-              500,
-              500,
-            );
-          }
-        );
+        for(let i = 0; i < file.length; i++){
+          fetch(file[i]).then(res => {
+            return res.blob();
+          }).then(blob => {
+              Resizer.imageFileResizer(
+                blob,
+                1000,
+                1000,
+                "JPEG",
+                100,
+                0,
+                (uri: any) => {
+                  // @ts-ignore
+                  this.afStorage.ref().child(name + '/' + i +'.jpg').put(uri).then(() => {
+                    arr.push("https://storage.googleapis.com/salutix/"+ name +"/"+i+".jpg")
+                    setTimeout(()=>{
+                      resolve(arr);
+                    }, 5000)
+                  }).catch(function (err: any) {
+                      console.error(err);
+                    });
+                },
+                "blob",
+                500,
+                500,
+              );
+            }
+          );
+        }
       });
   }
 
@@ -119,6 +124,6 @@ export class CreateComponent implements OnInit {
      dataForm.rank = 0;
      dataForm.image = await this.uploadFile(this.products?.image, this.products?.ASIN);
      dataForm.url = "https://amazon.fr/dp/" + this.products?.ASIN;
-     this.coupangService.createProduct(dataForm).subscribe(() => this.router.navigate(['products/list']).catch((err) => console.log(err)))
+     this.productService.createProduct(dataForm).subscribe(() => this.router.navigate(['products/list']).catch((err) => console.log(err)))
    }
 }

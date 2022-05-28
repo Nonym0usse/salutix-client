@@ -9,7 +9,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseURL = 'https://salutixapi.com/products';
+  private baseURL = 'http://localhost:3000/products';
 
   productsRef = this.afFirestore.collection('products');
 
@@ -22,6 +22,10 @@ export class ProductsService {
       {
         'Authorization': 'Bearer ' + user.stsTokenManager.accessToken,
       });
+  }
+
+  createProduct(product: Product): Observable<any> {
+    return this.http.post<Product>(`${this.baseURL}/add-product`, product);
   }
 
   deleteProduct(id: string, url: string, sellerProductId: string){

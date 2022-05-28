@@ -8,6 +8,7 @@ import {CreateComponent} from "./products/create/create.component";
 import {SecureInnerPagesGuard} from "./shared/secure-inner-pages.guard";
 import {ModifyComponent} from "./products/modify/modify.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {OrdersComponent} from "./orders/orders.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'products/create', component: CreateComponent, canActivate: [AuthGuard]  },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]  },
   { path: 'products/modify/:id', component: ModifyComponent, canActivate: [AuthGuard]  },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

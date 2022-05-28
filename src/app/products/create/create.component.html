@@ -17,6 +17,7 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" label="Verify got data">
+        <ng-http-loader spinner="sk-wave" [filteredMethods]="['POST']"></ng-http-loader>
         <div class="alert alert-success" *ngIf="success">
           {{success}}
         </div>

@@ -28,9 +28,7 @@ export class CoupangService {
     return this.http.get<Product>(`${this.baseURL}/sync`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
   }
 
-  syncCatalog(): Observable<any> {
-    return this.http.get<Product>(`${this.baseURL}/sync-catalog`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
-  }
+
 
   getOrders(): Observable<any> {
     return this.http.get(this.baseURL + '/orders');

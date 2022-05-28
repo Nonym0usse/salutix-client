@@ -5,6 +5,7 @@ import {SearchService} from "../services/search.service";
 import {debounceTime, map, Observable, of} from "rxjs";
 import {Product} from "../interfaces/product";
 import {CoupangService} from "../services/coupang.service";
+import {ProductsService} from "../services/products.service";
 
 // @ts-ignore
 @Component({
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
   // @ts-ignore
   products = of([]);
   searchModel = '';
-  constructor(private loginService: LoginService, private router: Router, private searchService: SearchService, private coupangService: CoupangService) {
+  constructor(private loginService: LoginService, private router: Router, private searchService: SearchService, private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class NavbarComponent implements OnInit {
   }
 
   syncCatalog(){
-    //this.coupangService.syncCatalog().subscribe((data) => console.log(data))
+    this.productsService.syncCatalog().subscribe((data) => console.log(data))
   }
 
   syncCoupang(){

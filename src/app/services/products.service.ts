@@ -28,9 +28,14 @@ export class ProductsService {
     return this.http.post<Product>(`${this.baseURL}/add-product`, product);
   }
 
+  syncCatalog(): Observable<any> {
+    return this.http.get<Product>(`${this.baseURL}/sync-catalog`, { headers: this.headers }).pipe(catchError(err => { return this.errorHandler(err)}));
+  }
+
   deleteProduct(id: string, url: string, sellerProductId: string){
-    this.afFS.refFromURL(url).delete()
-    return this.productsRef.doc(id).delete()
+    this.productsRef.doc(id).delete()
+    // @ts-ignore
+    return this.afFS.ref().child(id).delete()
   }
 
   modifyProduct(data: Product): Promise<void> {
@@ -49,5 +54,9 @@ export class ProductsService {
 
   getAllProducts(){
     return this.productsRef.snapshotChanges();
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    return throwError(error.message || "server error.");
   }
 }
